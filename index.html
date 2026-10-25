@@ -1,0 +1,638 @@
+```html
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colegio Provincial N° 18 - Plataforma ESI</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Montserrat & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bordo: {
+                            50: '#fdf2f4',
+                            100: '#fbe6e9',
+                            200: '#f7d0d6',
+                            300: '#f0abb6',
+                            400: '#e5798c',
+                            500: '#d54963',
+                            600: '#be2e4a',
+                            700: '#a0203a',
+                            800: '#800020', // Bordó institucional principal
+                            900: '#5a0218',
+                            950: '#38000d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-bordo {
+            background: linear-gradient(135deg, #800020 0%, #5a0218 100%);
+        }
+        .gradient-bordo-light {
+            background: linear-gradient(135deg, #a0203a 0%, #800020 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Navegación Superior -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Identidad Institucional -->
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-bordo-800 flex items-center justify-center text-white font-display font-bold text-xl shadow-md border-2 border-bordo-600">
+                        C18
+                    </div>
+                    <div>
+                        <span class="block text-xl font-display font-bold text-bordo-800 leading-none">Colegio Provincial N° 18</span>
+                        <span class="text-xs font-semibold text-slate-500 uppercase tracking-widest">Educación Secundaria</span>
+                    </div>
+                </div>
+
+                <!-- Menú Desktop -->
+                <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-700">
+                    <a href="#inicio" class="hover:text-bordo-800 transition-colors">Inicio</a>
+                    <a href="#fundamentacion" class="hover:text-bordo-800 transition-colors">Fundamentación</a>
+                    <a href="#objetivos" class="hover:text-bordo-800 transition-colors">Objetivos</a>
+                    <a href="#trabajos" class="hover:text-bordo-800 transition-colors">Trabajos y Equipos</a>
+                    <a href="#cierre" class="hover:text-bordo-800 transition-colors">Cierre</a>
+                </nav>
+
+                <!-- Botón de Acción -->
+                <div class="hidden sm:block">
+                    <button onclick="openModal('addProjectModal')" class="bg-bordo-800 hover:bg-bordo-900 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle"></i> Cargar Trabajo
+                    </button>
+                </div>
+
+                <!-- Botón Menú Mobile -->
+                <button id="mobileMenuBtn" class="md:hidden text-slate-700 focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú Mobile desplegable -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-3">
+            <a href="#inicio" class="block text-slate-700 font-medium hover:text-bordo-800 py-1">Inicio</a>
+            <a href="#fundamentacion" class="block text-slate-700 font-medium hover:text-bordo-800 py-1">Fundamentación</a>
+            <a href="#objetivos" class="block text-slate-700 font-medium hover:text-bordo-800 py-1">Objetivos</a>
+            <a href="#trabajos" class="block text-slate-700 font-medium hover:text-bordo-800 py-1">Trabajos y Equipos</a>
+            <a href="#cierre" class="block text-slate-700 font-medium hover:text-bordo-800 py-1">Cierre</a>
+            <button onclick="openModal('addProjectModal')" class="w-full bg-bordo-800 text-white py-2 rounded-lg text-sm font-semibold flex items-center justify-center gap-2">
+                <i class="fa-solid fa-plus-circle"></i> Cargar Trabajo
+            </button>
+        </div>
+    </header>
+
+    <!-- Héroe / Sección de Entrada -->
+    <section id="inicio" class="relative gradient-bordo text-white py-20 lg:py-28 overflow-hidden">
+        <!-- Decoración de fondo -->
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="inline-block bg-white/10 text-white text-xs font-semibold uppercase tracking-wider px-4 py-1.5 rounded-full mb-6 border border-white/20">
+                Plataforma Institucional ESI
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-display font-extrabold tracking-tight mb-6 leading-tight">
+                Colegio Provincial N° 18
+            </h1>
+            <p class="text-xl sm:text-2xl font-light italic text-bordo-100 max-w-3xl mx-auto leading-relaxed mb-8">
+                “ESI es un derecho al que todos están destinados a vivirlo, a convivirlo.”
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#trabajos" class="bg-white text-bordo-900 font-bold px-6 py-3 rounded-lg hover:bg-slate-100 transition-all shadow-lg hover:shadow-xl">
+                    <i class="fa-solid fa-folder-open mr-2"></i> Ver Trabajos de la Escuela
+                </a>
+                <a href="#fundamentacion" class="bg-bordo-700 text-white font-semibold px-6 py-3 rounded-lg hover:bg-bordo-600 transition-all border border-bordo-500">
+                    <i class="fa-solid fa-book-open mr-2"></i> Marco Legal y Proyecto
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fundamentación y Marco Legal -->
+    <section id="fundamentacion" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-bordo-800 font-bold text-sm uppercase tracking-wider">Fundamentación Educativa</span>
+                <h2 class="text-3xl font-display font-bold text-slate-900 mt-2">¿Por qué trabajamos la ESI en nuestra escuela?</h2>
+                <div class="w-16 h-1 bg-bordo-800 mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-stretch">
+                <!-- Marco Legal -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200 hover:border-bordo-300 transition-all shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-bordo-100 text-bordo-800 rounded-xl flex items-center justify-center text-xl font-bold mb-6">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">El Marco Legal: Ley Nacional N° 26.150</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            En Argentina, la Educación Sexual Integral es un derecho garantizado por la <strong>Ley N° 26.150</strong>. Esta normativa establece el derecho de todos los estudiantes a recibir ESI en todos los establecimientos educativos públicos y privados del país, desde el nivel inicial hasta el nivel superior.
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            No se limita únicamente a los aspectos biológicos o anatómicos, sino que integra los aspectos <strong>afectivos, cognitivos, éticos, sociales y normativos</strong>, promoviendo decisiones responsables e informadas sobre el cuerpo y el autocuidado.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-semibold text-bordo-800 flex items-center gap-2">
+                        <i class="fa-solid fa-check-circle"></i> Cumplimiento efectivo del derecho a la educación integral
+                    </div>
+                </div>
+
+                <!-- Enfoque pedagógico del Colegio N° 18 -->
+                <div class="bg-slate-50 p-8 rounded-2xl border border-slate-200 hover:border-bordo-300 transition-all shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 bg-bordo-100 text-bordo-800 rounded-xl flex items-center justify-center text-xl font-bold mb-6">
+                            <i class="fa-solid fa-school"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">El Compromiso del Colegio N° 18</h3>
+                        <p class="text-slate-600 leading-relaxed mb-4">
+                            En el nivel secundario del <strong>Colegio Provincial N° 18</strong>, entendemos que la adolescencia es una etapa fundamental de construcción de la identidad, autonomía y vinculación con los demás. 
+                        </p>
+                        <p class="text-slate-600 leading-relaxed">
+                            Abordar la ESI en nuestras aulas nos permite construir un espacio seguro de diálogo, prevención de violencias, deconstrucción de estereotipos de género y fortalecimiento del respeto a la diversidad y la empatía como pilares de la convivencia escolar.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-slate-200 text-xs font-semibold text-bordo-800 flex items-center gap-2">
+                        <i class="fa-solid fa-check-circle"></i> Espacio institucional inclusivo, abierto e informado
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ejes y Objetivos Específicos -->
+    <section id="objetivos" class="py-16 bg-slate-100/70 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-bordo-800 font-bold text-sm uppercase tracking-wider">Propósito Pedagógico</span>
+                <h2 class="text-3xl font-display font-bold text-slate-900 mt-2">Objetivos Institucionales de ESI</h2>
+                <p class="text-slate-600 mt-2">Los 5 ejes conceptuales trabajados transversalmente en nuestras aulas.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- Eje 1 -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 text-center hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-bordo-800 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Valorar la Afectividad</h4>
+                    <p class="text-xs text-slate-600">Reflexionar sobre emociones, vínculos sanos, empatía y el respeto por los sentimientos propios y ajenos.</p>
+                </div>
+
+                <!-- Eje 2 -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 text-center hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-bordo-800 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg">
+                        <i class="fa-solid fa-child-reaching"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Cuidar el Cuerpo y la Salud</h4>
+                    <p class="text-xs text-slate-600">Promover la salud integral, el autocuidado, el consentimiento y el conocimiento biológico y emocional.</p>
+                </div>
+
+                <!-- Eje 3 -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 text-center hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-bordo-800 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg">
+                        <i class="fa-solid fa-scale-unbalanced"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Garantizar la Equidad de Género</h4>
+                    <p class="text-xs text-slate-600">Cuestionar estereotipos, promover igualdad de derechos y oportunidades entre todas las personas.</p>
+                </div>
+
+                <!-- Eje 4 -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 text-center hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-bordo-800 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg">
+                        <i class="fa-solid fa-people-holding-hands"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Respetar la Diversidad</h4>
+                    <p class="text-xs text-slate-600">Reconocer y valorar las diferencias individuales, previniendo todo tipo de discriminación o acoso.</p>
+                </div>
+
+                <!-- Eje 5 -->
+                <div class="bg-white p-6 rounded-xl border border-slate-200 text-center hover:shadow-md transition-all">
+                    <div class="w-12 h-12 bg-bordo-800 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                    </div>
+                    <h4 class="font-bold text-slate-900 mb-2">Ejercer nuestros Derechos</h4>
+                    <p class="text-xs text-slate-600">Fomentar el pensamiento crítico, la participación activa y el conocimiento de los derechos fundamentales.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Presentación de Trabajo Conjunto -->
+    <section class="py-12 bg-bordo-900 text-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 border border-white/20">
+                <i class="fa-solid fa-users font-normal"></i> Trabajo Colaborativo e Interdisciplinario
+            </div>
+            <p class="text-lg sm:text-2xl font-light leading-relaxed max-w-4xl mx-auto text-slate-100">
+                A continuación, en esta plataforma se verán reflejados los trabajos de los referentes de ESI, cómo se trabajó con el referente de ESI <span class="font-semibold text-bordo-200">turno mañana</span> y <span class="font-semibold text-bordo-200">turno tarde</span> en conjunto a los directivos, a los profesores y a los alumnos.
+            </p>
+        </div>
+    </section>
+
+    <!-- Galería Interactiva de Trabajos por Turno -->
+    <section id="trabajos" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-bordo-800 font-bold text-sm uppercase tracking-wider">Muestrario de Proyectos</span>
+                    <h2 class="text-3xl font-display font-bold text-slate-900 mt-1">Trabajos Institucionales Realizados</h2>
+                </div>
+
+                <!-- Controles de Filtro -->
+                <div class="inline-flex p-1 bg-slate-100 rounded-xl border border-slate-200">
+                    <button id="btnFilterAll" onclick="filterShift('all')" class="px-5 py-2 rounded-lg text-sm font-semibold transition-all bg-bordo-800 text-white shadow-sm">
+                        Todos
+                    </button>
+                    <button id="btnFilterTM" onclick="filterShift('tm')" class="px-5 py-2 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-bordo-800">
+                        <i class="fa-solid fa-sun text-amber-500 mr-1.5"></i> Turno Mañana
+                    </button>
+                    <button id="btnFilterTT" onclick="filterShift('tt')" class="px-5 py-2 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:text-bordo-800">
+                        <i class="fa-solid fa-moon text-indigo-500 mr-1.5"></i> Turno Tarde
+                    </button>
+                </div>
+            </div>
+
+            <!-- Grid de Trabajos -->
+            <div id="projectsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Se llena dinámicamente con JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Cierre e Impacto -->
+    <section id="cierre" class="py-16 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:20px_20px]"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="w-16 h-16 bg-bordo-800 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl shadow-lg border-2 border-bordo-500">
+                <i class="fa-solid fa-quote-left"></i>
+            </div>
+
+            <h2 class="text-3xl font-display font-bold mb-6 text-white">Reflexión Final y Cierre Institucional</h2>
+            
+            <div class="space-y-6 text-slate-300 text-base sm:text-lg leading-relaxed text-justify sm:text-center">
+                <p>
+                    La concreción de esta plataforma representa un hito fundamental en el recorrido pedagógico e institucional del <strong>Colegio Provincial N° 18</strong>. La Educación Sexual Integral no es una jornada aislada en el calendario escolar, sino un proceso activo, continuo e integrado que atraviesa las aulas diariamente.
+                </p>
+                <p>
+                    A través de la labor articulada entre el equipo directivo, los docentes, los referentes de ESI de ambos turnos y el protagonismo de nuestras y nuestros estudiantes, logramos consolidar un espacio participativo donde el respeto, el diálogo reflexivo y la empatía se transforman en prácticas reales de convivencia.
+                </p>
+                <p class="font-semibold text-bordo-200 italic">
+                    Garantizar la ESI en la escuela secundaria es reafirmar nuestro compromiso con una educación inclusiva, con perspectiva de derechos y orientada al desarrollo humano pleno. Porque la ESI no se enseña únicamente con conceptos: se construye día a día en comunidad.
+                </p>
+            </div>
+
+            <div class="mt-10 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-center gap-6 text-xs text-slate-400">
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-school text-bordo-500"></i> Colegio Provincial N° 18
+                </span>
+                <span class="hidden sm:inline">•</span>
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-users-gear text-bordo-500"></i> Referentes ESI TM & TT
+                </span>
+                <span class="hidden sm:inline">•</span>
+                <span class="flex items-center gap-2">
+                    <i class="fa-solid fa-graduation-cap text-bordo-500"></i> Comunidad Educativa
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="bg-slate-950 text-slate-400 py-8 border-t border-slate-800 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-bordo-800 text-white font-bold flex items-center justify-center text-xs">C18</div>
+                <p>© 2026 Colegio Provincial N° 18 - Todos los derechos reservados.</p>
+            </div>
+            <p class="text-xs text-slate-500">Plataforma Educativa de Difusión ESI - Nivel Secundario</p>
+        </div>
+    </footer>
+
+    <!-- Modal Detalle del Trabajo -->
+    <div id="detailModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative">
+            <button onclick="closeModal('detailModal')" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full w-9 h-9 flex items-center justify-center transition-all z-10">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div id="modalContent">
+                <!-- Se llena dinámicamente -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Cargar Nuevo Trabajo -->
+    <div id="addProjectModal" class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative">
+            <button onclick="closeModal('addProjectModal')" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-full w-9 h-9 flex items-center justify-center transition-all">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <div class="mb-6">
+                <h3 class="text-2xl font-bold font-display text-slate-900">Agregar Trabajo ESI</h3>
+                <p class="text-sm text-slate-500 mt-1">Carga un nuevo proyecto realizado por estudiantes y docentes.</p>
+            </div>
+
+            <form id="addProjectForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Título del Trabajo</label>
+                    <input type="text" id="projectTitle" required placeholder="Ej: Taller sobre Vínculos Saludables" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-bordo-800 focus:border-bordo-800 text-sm outline-none">
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Turno</label>
+                        <select id="projectShift" required class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-bordo-800 focus:border-bordo-800 text-sm outline-none">
+                            <option value="tm">Turno Mañana</option>
+                            <option value="tt">Turno Tarde</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Curso / Año</label>
+                        <input type="text" id="projectGrade" required placeholder="Ej: 4° Año A" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-bordo-800 focus:border-bordo-800 text-sm outline-none">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Eje Temático ESI</label>
+                    <input type="text" id="projectTopic" required placeholder="Ej: Prevención de la Violencia de Género" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-bordo-800 focus:border-bordo-800 text-sm outline-none">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Descripción del Trabajo</label>
+                    <textarea id="projectDesc" rows="3" required placeholder="Describe la actividad, metodología y conclusiones alcanzadas..." class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-bordo-800 focus:border-bordo-800 text-sm outline-none"></textarea>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Docentes / Referentes a cargo</label>
+                    <input type="text" id="projectAuthors" required placeholder="Ej: Prof. Referente ESI y Equipo Directivo" class="w-full px-4 py-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-bordo-800 focus:border-bordo-800 text-sm outline-none">
+                </div>
+
+                <div class="pt-4 flex justify-end gap-3">
+                    <button type="button" onclick="closeModal('addProjectModal')" class="px-4 py-2.5 rounded-lg border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50">Cancelar</button>
+                    <button type="submit" class="px-6 py-2.5 rounded-lg bg-bordo-800 hover:bg-bordo-900 text-white font-semibold text-sm shadow-md">Guardar Trabajo</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts JavaScript -->
+    <script>
+        // Datos iniciales de trabajos (simulados)
+        const initialProjects = [
+            {
+                id: 1,
+                shift: 'tm',
+                shiftName: 'Turno Mañana',
+                title: 'Taller Debatiendo los Estereotipos de Género',
+                grade: '3° Año A y B',
+                topic: 'Equidad de Género',
+                desc: 'Jornada debate y creación de murales conceptuales donde las y los estudiantes analizaron los mandatos sociales representados en los medios de comunicación y redes sociales.',
+                authors: 'Referente ESI Turno Mañana & Profesores de Lengua y Arte',
+                image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80',
+                date: 'Septiembre 2026'
+            },
+            {
+                id: 2,
+                shift: 'tt',
+                shiftName: 'Turno Tarde',
+                title: 'Murales Interactivos: Cuidado del Cuerpo y Consentimiento',
+                grade: '2° Año C',
+                topic: 'Cuidado del Cuerpo y Autocuidado',
+                desc: 'Elaboración de infografías y afiches preventivos sobre el respeto a los límites personales, el consentimiento explícito y la promoción de espacios escolares libres de acoso.',
+                authors: 'Referente ESI Turno Tarde & Equipo de Preceptores',
+                image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=800&q=80',
+                date: 'Agosto 2026'
+            },
+            {
+                id: 3,
+                shift: 'tm',
+                shiftName: 'Turno Mañana',
+                title: 'Jornada sobre Vínculos Sanos y Prevención del Grooming',
+                grade: '4° y 5° Año',
+                topic: 'Afectividad y Ciudadanía Digital',
+                desc: 'Encuentro interdisciplinario enfocado en las relaciones de noviazgo violento, señales de alerta en el entorno digital y estrategias de autocuidado en redes sociales.',
+                authors: 'Referente ESI TM, Equipo Directivo y Asesora Pedagógica',
+                image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
+                date: 'Octubre 2026'
+            },
+            {
+                id: 4,
+                shift: 'tt',
+                shiftName: 'Turno Tarde',
+                title: 'Proyecto de Radio Escolar: "Nuestros Derechos Suenan"',
+                grade: '1° y 3° Año TT',
+                topic: 'Ejercicio de Derechos y Diversidad',
+                desc: 'Grabación de podcasts y spots radiales informativos elaborados por los alumnos sobre la Ley N° 26.150, la diversidad sexual y la inclusión institucional.',
+                authors: 'Referente ESI Turno Tarde & Prof. de Construcción de Ciudadanía',
+                image: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=800&q=80',
+                date: 'Septiembre 2026'
+            }
+        ];
+
+        let projects = [...initialProjects];
+        let currentFilter = 'all';
+
+        // Menú responsive
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Renderizar proyectos
+        function renderProjects() {
+            const container = document.getElementById('projectsGrid');
+            container.innerHTML = '';
+
+            const filteredProjects = currentFilter === 'all' 
+                ? projects 
+                : projects.filter(p => p.shift === currentFilter);
+
+            if (filteredProjects.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full py-12 text-center text-slate-400">
+                        <i class="fa-solid fa-folder-open text-4xl mb-3"></i>
+                        <p class="font-medium">No se encontraron trabajos para este turno.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filteredProjects.forEach(project => {
+                const isTM = project.shift === 'tm';
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl border border-slate-200 overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col justify-between group";
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-48 overflow-hidden bg-slate-100">
+                            <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" onerror="this.src='https://placehold.co/800x500/800020/FFFFFF?text=Trabajo+ESI+Colegio+18'">
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-bold text-white shadow-md ${isTM ? 'bg-amber-600' : 'bg-indigo-600'}">
+                                <i class="fa-solid ${isTM ? 'fa-sun' : 'fa-moon'} mr-1"></i> ${project.shiftName}
+                            </span>
+                            <span class="absolute bottom-3 right-3 bg-slate-900/80 text-white backdrop-blur-md px-2.5 py-1 rounded-md text-xs font-medium">
+                                ${project.grade}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs font-bold text-bordo-800 uppercase tracking-wider block mb-2">${project.topic}</span>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2 leading-snug group-hover:text-bordo-800 transition-colors">${project.title}</h3>
+                            <p class="text-slate-600 text-xs sm:text-sm line-clamp-3 mb-4 leading-relaxed">${project.desc}</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 border-t border-slate-100 flex items-center justify-between mt-auto">
+                        <span class="text-xs text-slate-400 font-medium"><i class="fa-regular fa-calendar mr-1"></i>${project.date}</span>
+                        <button onclick="openDetailModal(${project.id})" class="text-xs font-bold text-bordo-800 hover:text-bordo-900 hover:underline flex items-center gap-1">
+                            Ver Más <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Filtrar Turno
+        function filterShift(shift) {
+            currentFilter = shift;
+
+            // Actualizar clases de botones
+            const btnAll = document.getElementById('btnFilterAll');
+            const btnTM = document.getElementById('btnFilterTM');
+            const btnTT = document.getElementById('btnFilterTT');
+
+            const activeClass = "bg-bordo-800 text-white shadow-sm";
+            const inactiveClass = "text-slate-600 hover:text-bordo-800";
+
+            btnAll.className = `px-5 py-2 rounded-lg text-sm font-semibold transition-all ${shift === 'all' ? activeClass : inactiveClass}`;
+            btnTM.className = `px-5 py-2 rounded-lg text-sm font-semibold transition-all ${shift === 'tm' ? activeClass : inactiveClass}`;
+            btnTT.className = `px-5 py-2 rounded-lg text-sm font-semibold transition-all ${shift === 'tt' ? activeClass : inactiveClass}`;
+
+            renderProjects();
+        }
+
+        // Abrir y Cerrar Modales
+        function openModal(id) {
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        // Modal Detalle
+        function openDetailModal(id) {
+            const project = projects.find(p => p.id === id);
+            if (!project) return;
+
+            const modalContent = document.getElementById('modalContent');
+            const isTM = project.shift === 'tm';
+
+            modalContent.innerHTML = `
+                <div class="relative h-64 sm:h-80 w-full">
+                    <img src="${project.image}" alt="${project.title}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/800x500/800020/FFFFFF?text=Trabajo+ESI+Colegio+18'">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
+                    <div class="absolute bottom-4 left-6 right-6 text-white">
+                        <span class="px-3 py-1 rounded-full text-xs font-bold text-white mb-2 inline-block ${isTM ? 'bg-amber-600' : 'bg-indigo-600'}">
+                            <i class="fa-solid ${isTM ? 'fa-sun' : 'fa-moon'} mr-1"></i> ${project.shiftName}
+                        </span>
+                        <h2 class="text-2xl font-bold font-display leading-tight">${project.title}</h2>
+                    </div>
+                </div>
+
+                <div class="p-6 sm:p-8 space-y-6">
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs">
+                        <div>
+                            <span class="text-slate-400 block font-semibold uppercase">Curso / Año</span>
+                            <span class="font-bold text-slate-800 text-sm">${project.grade}</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 block font-semibold uppercase">Eje Temático</span>
+                            <span class="font-bold text-bordo-800 text-sm">${project.topic}</span>
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <span class="text-slate-400 block font-semibold uppercase">Fecha</span>
+                            <span class="font-bold text-slate-800 text-sm">${project.date}</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider mb-2">Desarrollo de la Actividad</h4>
+                        <p class="text-slate-600 leading-relaxed text-sm">${project.desc}</p>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100">
+                        <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">Coordinación / Referentes</h4>
+                        <p class="text-sm font-semibold text-slate-800"><i class="fa-solid fa-user-tie text-bordo-800 mr-2"></i>${project.authors}</p>
+                    </div>
+                </div>
+            `;
+
+            openModal('detailModal');
+        }
+
+        // Guardar nuevo proyecto
+        function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const title = document.getElementById('projectTitle').value;
+            const shift = document.getElementById('projectShift').value;
+            const grade = document.getElementById('projectGrade').value;
+            const topic = document.getElementById('projectTopic').value;
+            const desc = document.getElementById('projectDesc').value;
+            const authors = document.getElementById('projectAuthors').value;
+
+            const newProject = {
+                id: Date.now(),
+                shift: shift,
+                shiftName: shift === 'tm' ? 'Turno Mañana' : 'Turno Tarde',
+                title: title,
+                grade: grade,
+                topic: topic,
+                desc: desc,
+                authors: authors,
+                image: 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80',
+                date: 'Reciente'
+            };
+
+            projects.unshift(newProject);
+            renderProjects();
+            closeModal('addProjectModal');
+            document.getElementById('addProjectForm').reset();
+
+            // Desplazar suavemente a la sección de trabajos
+            document.getElementById('trabajos').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Inicialización al cargar la página
+        window.onload = function() {
+            renderProjects();
+        };
+    </script>
+</body>
+</html>
+```
